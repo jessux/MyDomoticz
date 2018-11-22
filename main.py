@@ -50,38 +50,38 @@ fatfree={}
 fatratio={}
 fatmassweight={}
 bpm={}
-while True:
-    try:
-        for measure in MEASURES:
-            if measure == 1:
-                weight=api(d[u'access_token'],measure)
-                with open("dataweight.json", "w") as outfile:
-                    outfile.write('{"date": "'+datetime.datetime.fromtimestamp(weight[u'body'][u'measuregrps'][0][u'created']).strftime('%d-%m-%Y %H:%M:%S')+'",')
-                    outfile.write('"poids":')
-                    for p in weight[u'body'][u'measuregrps'][0][u'measures']:
-                        outfile.write(str(p[u'value'])[:-3] + "." + str(p[u'value'])[len(str(p[u'value'])) - 3:])
-                    outfile.write("}")
-            elif measure == 4:
-                height=api(d[u'access_token'],measure)
-                print height
-            elif measure == 5:
-                fatfree=api(d[u'access_token'], measure)
-                print fatfree
-            elif measure == 6:
-                fatratio=api(d[u'access_token'], measure)
-                with open("datafatratio.json", "w") as outfile:
-                    outfile.write(
-                        '{"date": "' + datetime.datetime.fromtimestamp(fatratio[u'body'][u'measuregrps'][0][u'created']).strftime(
-                        '%d-%m-%Y %H:%M:%S') + '",')
-                    outfile.write('"ratio":')
-                    for p in fatratio[u'body'][u'measuregrps'][0][u'measures']:
-                        outfile.write(str(p[u'value'])[:-3] + "." + str(p[u'value'])[len(str(p[u'value'])) - 3:])
-                    outfile.write("}")
-            elif measure == 8:
-                fatmassweight=api(d[u'access_token'],measure)
-                print fatmassweight
-            elif measure == 11:
-                bpm=api(d[u'access_token'], measure)
-                print bpm
-    except:
-        d = refresh(d[u'refresh_token'])
+
+try:
+    for measure in MEASURES:
+        if measure == 1:
+            weight=api(d[u'access_token'],measure)
+            with open("dataweight.json", "w") as outfile:
+                outfile.write('{"date": "'+datetime.datetime.fromtimestamp(weight[u'body'][u'measuregrps'][0][u'created']).strftime('%d-%m-%Y %H:%M:%S')+'",')
+                outfile.write('"poids":')
+                for p in weight[u'body'][u'measuregrps'][0][u'measures']:
+                    outfile.write(str(p[u'value'])[:-3] + "." + str(p[u'value'])[len(str(p[u'value'])) - 3:])
+                outfile.write("}")
+        elif measure == 4:
+            height=api(d[u'access_token'],measure)
+            print height
+        elif measure == 5:
+            fatfree=api(d[u'access_token'], measure)
+            print fatfree
+        elif measure == 6:
+            fatratio=api(d[u'access_token'], measure)
+            with open("datafatratio.json", "w") as outfile:
+                outfile.write(
+                    '{"date": "' + datetime.datetime.fromtimestamp(fatratio[u'body'][u'measuregrps'][0][u'created']).strftime(
+                    '%d-%m-%Y %H:%M:%S') + '",')
+                outfile.write('"ratio":')
+                for p in fatratio[u'body'][u'measuregrps'][0][u'measures']:
+                    outfile.write(str(p[u'value'])[:-3] + "." + str(p[u'value'])[len(str(p[u'value'])) - 3:])
+                outfile.write("}")
+        elif measure == 8:
+            fatmassweight=api(d[u'access_token'],measure)
+            print fatmassweight
+        elif measure == 11:
+            bpm=api(d[u'access_token'], measure)
+            print bpm
+except:
+    d = refresh(d[u'refresh_token'])
