@@ -8,3 +8,11 @@
 \.idea/vcs\.xml
 
 \.idea/workspace\.xml
+
+datafatratio\.json
+
+dataweight\.json
+
+settings\.pyc
+
+tokenstore\.pyc
